@@ -12,6 +12,7 @@ func main() {
 	h := handlers.NewHandler()
 
 	r.HandleFunc("/objects", h.GetObjects).Methods("GET")
+	r.HandleFunc("/objects", h.CreateObject).Methods("POST")
 
 	log.Fatal(http.ListenAndServe(":8080", r))
 }

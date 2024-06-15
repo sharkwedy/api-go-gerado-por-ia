@@ -1,6 +1,7 @@
 package services
 
 import (
+	"bytes"
 	"encoding/json"
 	"errors"
 	"net/http"
@@ -9,6 +10,7 @@ import (
 
 type Service interface {
 	FetchObjects() ([]models.Object, error)
+	CreateObject(obj models.Object) (models.Object, error)
 }
 
 type service struct {}
@@ -34,4 +36,28 @@ func (s *service) FetchObjects() ([]models.Object, error) {
 	}
 
 	return objects, nil
+}
+
+func (s *service) CreateObject(obj models.Object) (models.Object, error) {
+	jsonObj, err := json.Marshal(obj)
+	if err != nil {
+		return models.Object{}, err
+	}
+
+	resp, err := http.Post("https://api.restful-api.dev/objects", "application/json", bytes.NewBuffer(jsonObj))
+	if err != nil {
+		return models.Object{}, err
+	}
+	defer resp.Body.Close()
+
+	if resp.StatusCode != http.StatusCreated {
+		return models.Object{}, errors.New("failed to create object")
+	}
+
+	var newObj models.Object
+	if err := json.NewDecoder(resp.Body).Decode(&newObj); err != nil {
+		return models.Object{}, err
+	}
+
+	return newObj, nil
 }
