@@ -1,3 +1,5 @@
+# Projeto, código e repositorio inteiramente gerado por ia
+
 # REST API Project
 
 Este é um projeto de API REST construído em Go usando o `net/http` para o servidor e cliente. A API integra-se com a seguinte API externa: `https://api.restful-api.dev/objects`.
