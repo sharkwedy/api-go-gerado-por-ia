@@ -21,7 +21,7 @@ Este é um projeto de API REST construído em Go usando o `net/http` para o serv
 Para instalar as dependências do projeto, execute o comando abaixo no diretório raiz do projeto:
 
 ```bash
-go mod tidy
+ go mod tidy
 ```
 
 ## Executando o Servidor
@@ -29,7 +29,7 @@ go mod tidy
 Para iniciar o servidor, execute o seguinte comando:
 
 ```bash
-go run cmd/server/main.go
+ go run cmd/server/main.go
 ```
 
 O servidor estará disponível em `http://localhost:8080`.
@@ -39,7 +39,7 @@ O servidor estará disponível em `http://localhost:8080`.
 Para executar os testes unitários, utilize o comando abaixo:
 
 ```bash
-go test ./...
+ go test ./...
 ```
 
 Este comando executará todos os testes presentes nos pacotes do projeto.
@@ -62,6 +62,78 @@ Este comando executará todos os testes presentes nos pacotes do projeto.
 │       └── service_test.go
 ├── go.mod
 └── README.md
+```
+
+## Funcionalidades da API
+
+### Obter Objetos
+
+Endpoint para obter todos os objetos da API externa.
+
+**Requisição:**
+
+```bash
+ curl -X GET http://localhost:8080/objects
+```
+
+**Resposta:**
+
+```json
+[
+  {
+    "id": "1",
+    "name": "Google Pixel 6 Pro",
+    "data": {
+      "color": "Cloudy White",
+      "capacity": "128 GB"
+    }
+  },
+  {
+    "id": "2",
+    "name": "Apple iPhone 12 Mini, 256GB, Blue",
+    "data": null
+  },
+  {
+    "id": "3",
+    "name": "Apple iPhone 12 Pro Max",
+    "data": {
+      "color": "Cloudy White",
+      "capacity GB": 512
+    }
+  }
+]
+```
+
+### Criar Objeto
+
+Endpoint para criar um novo objeto na API externa.
+
+**Requisição:**
+
+```bash
+ curl -X POST http://localhost:8080/objects \
+  -H "Content-Type: application/json" \
+  -d '{
+    "id": "4",
+    "name": "Samsung Galaxy S21",
+    "data": {
+      "color": "Phantom Gray",
+      "capacity": "256 GB"
+    }
+  }'
+```
+
+**Resposta:**
+
+```json
+{
+  "id": "4",
+  "name": "Samsung Galaxy S21",
+  "data": {
+    "color": "Phantom Gray",
+    "capacity": "256 GB"
+  }
+}
 ```
 
 ## Contato
