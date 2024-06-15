@@ -104,6 +104,10 @@ Endpoint para obter todos os objetos da API externa.
 ]
 ```
 
+**Possíveis Erros:**
+
+- `500 Internal Server Error`: Falha ao buscar objetos. Verifique se a API externa está disponível e funcionando corretamente.
+
 ### Criar Objeto
 
 Endpoint para criar um novo objeto na API externa.
@@ -135,6 +139,11 @@ Endpoint para criar um novo objeto na API externa.
   }
 }
 ```
+
+**Possíveis Erros:**
+
+- `400 Bad Request`: Entrada inválida. Verifique se o corpo da solicitação está formatado corretamente.
+- `500 Internal Server Error`: Falha ao criar o objeto. Verifique se a API externa está disponível e funcionando corretamente.
 
 ## Contato
 
